@@ -1,0 +1,25 @@
+name: .NET Core
+
+on:
+  push
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore ${{ github.workspace }}/devops/Game Dev project 2020/Game Dev project 2020/Game1.cs
+
+    - name: Test
+      run: dotnet test ${{ github.workspace }}/devops/Game Dev project 2020/Game Dev project 2020/Game1.cs  --no-restore --verbosity normal
+      
+    - name: Build
+      run: dotnet build ${{ github.workspace }}/devops/Game Dev project 2020/Game Dev project 2020/Game1.cs  --configuration Release --no-restore 
