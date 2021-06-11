@@ -12,3 +12,17 @@
     ansible.builtin.git:
      repo: "https://github.com/BjornJongenelen/devops.git"
      dest: "/home/{{ ansible_user }}/Desktop"
+
+  - name: Install Jenkins
+    docker_container:
+     name: jenkins
+     image: jenkins/jenkins
+     ports:
+      - "8080:8080"
+
+  - name: Install check_mk
+    docker_container:
+     name: check mk
+     image: checkmk/check-mk-raw
+     ports:
+      - "8081:8081
